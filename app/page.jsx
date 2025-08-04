@@ -581,7 +581,7 @@ export default function AfyaPrimeSupplies() {
 
           <div className="border-t border-slate-800 mt-8 pt-8 text-center">
             <p className="text-slate-400">
-              © 2024 Afya Prime Supplies. All rights reserved. | Privacy Policy | Terms of Service
+              © 2025 Afya Prime Supplies. All rights reserved. | Privacy Policy | Terms of Service
             </p>
           </div>
         </div>
