@@ -3,7 +3,7 @@ import Image from "next/image";
 
 const Aboutpage = () => {
   return (
-    <div className="p-10 mt-5 ">
+    <div className="p-10 mt-5 background:bg-white-400 ">
       <h1 className="text-bold text-5xl mt-4 ">About Afya Prime Supplies</h1>
       <p className="text-gray-500 mt-5 text-xl">
         With many years of experience in the medical supply industry, Afya Prime

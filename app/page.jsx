@@ -4,6 +4,7 @@
 import { useState } from "react"
 import Image from "next/image"
 import Link from "next/link"
+import { useRouter } from "next/navigation"
 import {
   Menu,
   X,
@@ -31,7 +32,8 @@ import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 
 export default function AfyaPrimeSupplies() {
-  const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const router= useRouter();
 
   const categories = [
     {
@@ -210,7 +212,7 @@ export default function AfyaPrimeSupplies() {
                 </Link>
               </li>
               <li>
-                <Link href="/about" className="text-white hover:text-green-400">
+                <Link href="#about" className="text-white hover:text-green-400">
                   About Us
                 </Link>
               </li>
@@ -399,7 +401,7 @@ export default function AfyaPrimeSupplies() {
       </section>
 
       {/* About Section */}
-      <section className="py-16 bg-white">
+      <section className="py-16 bg-white scroll-mt-24" id="about">
         <div className="container mx-auto px-4">
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div>
@@ -427,7 +429,10 @@ export default function AfyaPrimeSupplies() {
                   <div className="text-slate-600">Support</div>
                 </div>
               </div>
-              <Button size="lg" className="bg-green-600 text-white hover:bg-green-700">
+              <Button size="lg" 
+              className="bg-green-600 text-white hover:bg-green-700"
+              onClick={() => router.push("/about")}
+              >
                 Learn More About Us
               </Button>
             </div>
