@@ -438,7 +438,7 @@ export default function AfyaPrimeSupplies() {
             </div>
             <div className="relative">
               <Image
-                src="/placeholder.svg?height=500&width=600"
+                src="/assets/images/medical-equipment.png"
                 alt="Medical Professionals"
                 width={600}
                 height={500}
