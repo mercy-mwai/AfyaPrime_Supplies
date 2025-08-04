@@ -1,8 +1,8 @@
 import "../styles/globals.css";
 
 export const metadata = {
-  title: "E-commerce Website",
-  description: "Welcome to my Website!",
+  title: "Afya Prime Supplies",
+  description: "Welcome to our website!",
 };
 
 export default function RootLayout({ children }) {
