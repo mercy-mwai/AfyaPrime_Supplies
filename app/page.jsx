@@ -136,7 +136,7 @@ export default function AfyaPrimeSupplies() {
             <div className="flex items-center space-x-4">
               <div className="flex items-center">
                 <Phone className="h-4 w-4 mr-1" />
-                <span>+254 700 123 456</span>
+                <span>+254701 828992</span>
               </div>
               <div className="flex items-center">
                 <Mail className="h-4 w-4 mr-1" />
@@ -542,7 +542,7 @@ export default function AfyaPrimeSupplies() {
                     <h4 className="text-lg font-semibold text-slate-800">
                       Phone Number
                     </h4>
-                    <p className="text-slate-600">+254 700 123 456</p>
+                    <p className="text-slate-600">+254701 828992</p>
                   </div>
                 </div>
                 <div className="flex items-start space-x-4">
@@ -665,6 +665,7 @@ export default function AfyaPrimeSupplies() {
               size="lg"
               variant="outline"
               className="border-green-600 text-green-400 hover:bg-green-600 hover:text-white bg-transparent"
+              onClick={() => router.push("#contact")}
             >
               Call Us Now
             </Button>
@@ -701,7 +702,7 @@ export default function AfyaPrimeSupplies() {
                 <div className="flex items-center">
                   <Phone className="h-4 w-4 mr-2 text-green-400" />
                   <span className="text-sm text-slate-300">
-                    +254 700 123 456
+                    +254701 828992
                   </span>
                 </div>
                 <div className="flex items-center">
