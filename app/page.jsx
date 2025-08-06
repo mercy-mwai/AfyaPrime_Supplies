@@ -658,6 +658,7 @@ export default function AfyaPrimeSupplies() {
             <Button
               size="lg"
               className="bg-green-600 text-white hover:bg-green-700"
+               onClick={() => router.push("#contact")}
             >
               Request Quote
             </Button>
