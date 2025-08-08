@@ -20,9 +20,11 @@ import {
   Stethoscope,
   Syringe,
   Heart,
-  Activity,
   ChevronRight,
   Star,
+  Droplet,
+  FuelIcon as Gas, 
+  TreesIcon as Lungs
 } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
@@ -36,26 +38,26 @@ export default function AfyaPrimeSupplies() {
 
   const categories = [
     {
-      name: "Surgical Instruments",
+      name: "Infusion & Injection",
       icon: Syringe,
       image: "/placeholder.svg?height=200&width=300",
       count: "150+ Products",
     },
     {
-      name: "Diagnostic Equipment",
-      icon: Stethoscope,
+      name: "Urology",
+      icon: Droplet,
       image: "/placeholder.svg?height=200&width=300",
       count: "80+ Products",
     },
     {
-      name: "Patient Monitoring",
-      icon: Activity,
+      name: "Anesthesia",
+      icon: Gas,
       image: "/placeholder.svg?height=200&width=300",
       count: "60+ Products",
     },
     {
-      name: "Emergency Care",
-      icon: Heart,
+      name: "Respiratory Care",
+      icon: Lungs,
       image: "/placeholder.svg?height=200&width=300",
       count: "120+ Products",
     },
