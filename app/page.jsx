@@ -40,25 +40,25 @@ export default function AfyaPrimeSupplies() {
     {
       name: "Infusion & Injection",
       icon: Syringe,
-      image: "/assets/images/infusion.jpg",
+      image: "/assets/images/infusion/infusion.jpg",
       count: "150+ Products",
     },
     {
       name: "Urology",
       icon: Droplet,
-      image: "/assets/images/urology.jpg",
+      image: "/assets/images/urology/urology.jpg",
       count: "80+ Products",
     },
     {
       name: "Anesthesia",
       icon: Gas,
-      image: "/assets/images/anaesthesia.jpeg",
+      image: "/assets/images/anaesthesia/anaesthesia.jpeg",
       count: "60+ Products",
     },
     {
       name: "Respiratory Care",
       icon: Lungs,
-      image: "/assets/images/respiratory.jpeg",
+      image: "/assets/images/respiratory/respiratory.jpeg",
       count: "120+ Products",
     },
   ];
