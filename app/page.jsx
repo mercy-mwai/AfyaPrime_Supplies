@@ -40,25 +40,25 @@ export default function AfyaPrimeSupplies() {
     {
       name: "Infusion & Injection",
       icon: Syringe,
-      image: "/placeholder.svg?height=200&width=300",
+      image: "/assets/images/infusion.jpg",
       count: "150+ Products",
     },
     {
       name: "Urology",
       icon: Droplet,
-      image: "/placeholder.svg?height=200&width=300",
+      image: "/assets/images/urology.jpg",
       count: "80+ Products",
     },
     {
       name: "Anesthesia",
       icon: Gas,
-      image: "/placeholder.svg?height=200&width=300",
+      image: "/assets/images/anaesthesia.jpeg",
       count: "60+ Products",
     },
     {
       name: "Respiratory Care",
       icon: Lungs,
-      image: "/placeholder.svg?height=200&width=300",
+      image: "/assets/images/respiratory.jpeg",
       count: "120+ Products",
     },
   ];
@@ -291,7 +291,7 @@ export default function AfyaPrimeSupplies() {
             </div>
             <div className="relative">
               <Image
-                src="/assets/images/medical-equipment.png"
+                src="/assets/images/medicine.jpeg"
                 alt="Medical Equipment"
                 width={600}
                 height={500}
