@@ -225,14 +225,6 @@ export default function AfyaPrimeSupplies() {
                 </Link>
               </li>
               <li>
-                <Link
-                  href="/categories"
-                  className="text-white hover:text-green-400"
-                >
-                  Categories
-                </Link>
-              </li>
-              <li>
                 <Link href="#about" className="text-white hover:text-green-400">
                   About Us
                 </Link>
