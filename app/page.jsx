@@ -67,36 +67,28 @@ export default function AfyaPrimeSupplies() {
     {
       id: 1,
       name: "Digital Blood Pressure Monitor",
-      price: "KSh 8,500",
-      originalPrice: "KSh 10,000",
-      image: "/placeholder.svg?height=250&width=250",
+      image: "/assets/images/Digital Blood Pressure Monitor.png",
       badge: "Best Seller",
       rating: 4.8,
     },
     {
       id: 2,
       name: "Surgical Scissors Set",
-      price: "KSh 3,200",
-      originalPrice: "KSh 4,000",
-      image: "/placeholder.svg?height=250&width=250",
+      image: "/assets/images/Surgical Scissors Set.jpg",
       badge: "New Arrival",
       rating: 4.9,
     },
     {
       id: 3,
       name: "Digital Thermometer",
-      price: "KSh 1,800",
-      originalPrice: "KSh 2,500",
-      image: "/placeholder.svg?height=250&width=250",
+      image: "/assets/images/Digital Thermometer.jpg",
       badge: "Hot Deal",
       rating: 4.7,
     },
     {
       id: 4,
       name: "Pulse Oximeter",
-      price: "KSh 4,500",
-      originalPrice: "KSh 6,000",
-      image: "/placeholder.svg?height=250&width=250",
+      image: "/assets/images/Pulse Oximeter.jpg",
       badge: "Featured",
       rating: 4.8,
     },
@@ -436,12 +428,6 @@ export default function AfyaPrimeSupplies() {
                     </h3>
                     <div className="flex items-center justify-between mb-4">
                       <div>
-                        <span className="text-2xl font-bold text-green-600">
-                          {product.price}
-                        </span>
-                        <span className="text-sm text-slate-500 line-through ml-2">
-                          {product.originalPrice}
-                        </span>
                       </div>
                     </div>
                     <Button className="w-full bg-slate-800 text-green-400 hover:bg-slate-700">
