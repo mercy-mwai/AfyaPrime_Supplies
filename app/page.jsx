@@ -260,6 +260,7 @@ export default function AfyaPrimeSupplies() {
                 <Button
                   size="lg"
                   className="bg-white text-green-700 hover:bg-green-50"
+                  onClick={() => router.push("/products")}
                 >
                   Shop Now
                   <ChevronRight className="ml-2 h-5 w-5" />
@@ -268,6 +269,7 @@ export default function AfyaPrimeSupplies() {
                   size="lg"
                   variant="outline"
                   className="border-white text-white hover:bg-white hover:text-green-700 bg-transparent"
+                  onClick={() => router.push("/products")}
                 >
                   View Catalog
                 </Button>
@@ -354,6 +356,7 @@ export default function AfyaPrimeSupplies() {
                     <Button
                       variant="outline"
                       className="w-full group-hover:bg-green-600 group-hover:text-white group-hover:border-green-600 bg-transparent border-green-600 text-green-600"
+                      onClick={() => router.push("/products")}
                     >
                       View Products
                       <ChevronRight className="ml-2 h-4 w-4" />
@@ -435,6 +438,7 @@ export default function AfyaPrimeSupplies() {
               size="lg"
               variant="outline"
               className="border-slate-800 text-slate-800 hover:bg-slate-800 hover:text-green-400 bg-transparent"
+              onClick={() => router.push("/products")}
             >
               View All Products
               <ChevronRight className="ml-2 h-5 w-5" />
@@ -719,7 +723,7 @@ export default function AfyaPrimeSupplies() {
                 </li>
                 <li>
                   <Link
-                    href="/services"
+                    href="#services"
                     className="text-slate-400 hover:text-green-400"
                   >
                     Services
@@ -727,18 +731,10 @@ export default function AfyaPrimeSupplies() {
                 </li>
                 <li>
                   <Link
-                    href="/contact"
+                    href="#contact"
                     className="text-slate-400 hover:text-green-400"
                   >
                     Contact
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href="/careers"
-                    className="text-slate-400 hover:text-green-400"
-                  >
-                    Careers
                   </Link>
                 </li>
               </ul>
@@ -752,23 +748,23 @@ export default function AfyaPrimeSupplies() {
               <ul className="space-y-2">
                 <li>
                   <Link
-                    href="/surgical"
+                    href="/products/anesthesia-ventilator-cpap"
                     className="text-slate-400 hover:text-green-400"
                   >
-                    Surgical Instruments
+                   Anesthesia/Ventilator/CPAP
                   </Link>
                 </li>
                 <li>
                   <Link
-                    href="/diagnostic"
+                    href="/products/monitor-ecg-defibrillator"
                     className="text-slate-400 hover:text-green-400"
                   >
-                    Diagnostic Equipment
+                    Monitor/ECG/Defibrillator
                   </Link>
                 </li>
                 <li>
                   <Link
-                    href="/monitoring"
+                    href="/products/patient-monitor"
                     className="text-slate-400 hover:text-green-400"
                   >
                     Patient Monitoring
@@ -776,18 +772,18 @@ export default function AfyaPrimeSupplies() {
                 </li>
                 <li>
                   <Link
-                    href="/emergency"
+                    href="/products/patient-care"
                     className="text-slate-400 hover:text-green-400"
                   >
-                    Emergency Care
+                    Patient Care
                   </Link>
                 </li>
                 <li>
                   <Link
-                    href="/laboratory"
+                    href="/products/maternal-neonatal-healthcare"
                     className="text-slate-400 hover:text-green-400"
                   >
-                    Laboratory Supplies
+                   Maternal & Neonatal Healthcare
                   </Link>
                 </li>
               </ul>
