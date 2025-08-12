@@ -1,6 +1,7 @@
+
 "use client"
 
-import { useState, useEffect } from "react" 
+import { useState } from "react"
 import Image from "next/image"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
@@ -37,7 +38,11 @@ export default function AfyaPrimeSupplies() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [searchQuery, setSearchQuery] = useState("")
   const [searchResults, setSearchResults] = useState([])
+  const [isSearching, setIsSearching] = useState(false)
   const router = useRouter()
+
+  // Debug: Log categoriesData to see if it's loaded
+  console.log("categoriesData:", categoriesData)
 
   // Flatten all products for easier searching
   const allProducts = categoriesData.flatMap((category) =>
@@ -51,10 +56,17 @@ export default function AfyaPrimeSupplies() {
     ),
   )
 
-  // Filter products based on search query
-  useEffect(() => {
+  // Debug: Log allProducts to see if flattening works
+  console.log("allProducts:", allProducts)
+
+  // Handle search button click
+  const handleSearch = () => {
+    console.log("Search button clicked with query:", searchQuery)
+    setIsSearching(true)
+
     if (searchQuery.trim() === "") {
       setSearchResults([])
+      setIsSearching(false)
       return
     }
 
@@ -65,8 +77,25 @@ export default function AfyaPrimeSupplies() {
         product.subcategoryName.toLowerCase().includes(lowerCaseQuery) ||
         product.categoryName.toLowerCase().includes(lowerCaseQuery),
     )
+
+    console.log("Filtered results:", filtered)
     setSearchResults(filtered)
-  }, [searchQuery]) // Re-run effect when searchQuery changes
+    setIsSearching(false)
+  }
+
+  // Handle Enter key press in search input
+  const handleKeyPress = (e) => {
+    if (e.key === "Enter") {
+      e.preventDefault()
+      handleSearch()
+    }
+  }
+
+  // Clear search
+  const clearSearch = () => {
+    setSearchQuery("")
+    setSearchResults([])
+  }
 
   const categories = [
     {
@@ -192,21 +221,29 @@ export default function AfyaPrimeSupplies() {
 
             {/* Search Bar */}
             <div className="hidden md:flex flex-1 max-w-md mx-8">
-              <div className="relative w-full">
+              <div className="relative w-full flex">
                 <Input
                   type="search"
                   placeholder="Search medical supplies..."
-                  className="pl-10 bg-slate-700 border-slate-600 text-white placeholder-slate-400"
+                  className="pl-10 pr-20 bg-slate-700 border-slate-600 text-white placeholder-slate-400 rounded-r-none"
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
+                  onKeyPress={handleKeyPress}
                 />
                 <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-slate-400" />
+                <Button
+                  onClick={handleSearch}
+                  disabled={isSearching}
+                  className="bg-green-600 hover:bg-green-700 text-white px-4 rounded-l-none border-l-0"
+                >
+                  {isSearching ? "..." : "Search"}
+                </Button>
                 {searchQuery && (
                   <Button
                     variant="ghost"
                     size="sm"
-                    className="absolute right-2 top-1/2 transform -translate-y-1/2 text-slate-400 hover:text-white"
-                    onClick={() => setSearchQuery("")}
+                    className="absolute right-16 top-1/2 transform -translate-y-1/2 text-slate-400 hover:text-white"
+                    onClick={clearSearch}
                   >
                     <X className="h-4 w-4" />
                   </Button>
@@ -260,6 +297,38 @@ export default function AfyaPrimeSupplies() {
             </ul>
           </nav>
         </div>
+
+        {/* Mobile Search */}
+        <div className={`mt-4 ${isMenuOpen ? "block" : "hidden"} md:hidden`}>
+          <div className="relative w-full flex">
+            <Input
+              type="search"
+              placeholder="Search medical supplies..."
+              className="pl-10 pr-20 bg-slate-700 border-slate-600 text-white placeholder-slate-400 rounded-r-none"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              onKeyPress={handleKeyPress}
+            />
+            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-slate-400" />
+            <Button
+              onClick={handleSearch}
+              disabled={isSearching}
+              className="bg-green-600 hover:bg-green-700 text-white px-4 rounded-l-none border-l-0"
+            >
+              {isSearching ? "..." : "Search"}
+            </Button>
+            {searchQuery && (
+              <Button
+                variant="ghost"
+                size="sm"
+                className="absolute right-16 top-1/2 transform -translate-y-1/2 text-slate-400 hover:text-white"
+                onClick={clearSearch}
+              >
+                <X className="h-4 w-4" />
+              </Button>
+            )}
+          </div>
+        </div>
       </header>
 
       {/* Hero Section */}
@@ -276,9 +345,10 @@ export default function AfyaPrimeSupplies() {
                 for hospitals, clinics, and healthcare professionals.
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
-                <Button size="lg" 
-                className="bg-white text-green-700 hover:bg-green-50"
-                onClick={()=> router.push("/products")}
+                <Button
+                  size="lg"
+                  className="bg-white text-green-700 hover:bg-green-50"
+                  onClick={() => router.push("/products")}
                 >
                   Shop Now
                   <ChevronRight className="ml-2 h-5 w-5" />
@@ -287,7 +357,7 @@ export default function AfyaPrimeSupplies() {
                   size="lg"
                   variant="outline"
                   className="border-white text-white hover:bg-white hover:text-green-700 bg-transparent"
-                  onClick={()=> router.push("/products")}
+                  onClick={() => router.push("/products")}
                 >
                   View Catalog
                 </Button>
@@ -316,7 +386,14 @@ export default function AfyaPrimeSupplies() {
           <div className="container mx-auto px-4">
             <div className="text-center mb-12">
               <h2 className="text-4xl font-bold mb-4 text-slate-800">Search Results for "{searchQuery}"</h2>
-              <p className="text-xl text-slate-600">Found {searchResults.length} matching products</p>
+              <p className="text-xl text-slate-600 mb-4">Found {searchResults.length} matching products</p>
+              <Button
+                onClick={clearSearch}
+                variant="outline"
+                className="border-slate-800 text-slate-800 hover:bg-slate-800 hover:text-white bg-transparent"
+              >
+                Clear Search
+              </Button>
             </div>
             <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
               {searchResults.map((product, index) => (
@@ -330,7 +407,6 @@ export default function AfyaPrimeSupplies() {
                         height={250}
                         className="w-full h-64 object-cover"
                       />
-                      {/* You can add badges or other info here if needed */}
                     </div>
                     <div className="p-6">
                       <h3 className="text-lg font-semibold mb-2 line-clamp-2 text-slate-800">{product.name}</h3>
@@ -345,6 +421,21 @@ export default function AfyaPrimeSupplies() {
                 </Card>
               ))}
             </div>
+          </div>
+        </section>
+      )}
+
+      {/* Show message when search has no results */}
+      {searchQuery && searchResults.length === 0 && searchQuery.trim() !== "" && (
+        <section className="py-16 bg-white">
+          <div className="container mx-auto px-4 text-center">
+            <h2 className="text-2xl font-bold mb-4 text-slate-800">No results found for "{searchQuery}"</h2>
+            <p className="text-lg text-slate-600 mb-8">
+              Try searching with different keywords or browse our categories below.
+            </p>
+            <Button onClick={clearSearch} className="bg-green-600 text-white hover:bg-green-700">
+              Clear Search & Browse Categories
+            </Button>
           </div>
         </section>
       )}
@@ -710,7 +801,6 @@ export default function AfyaPrimeSupplies() {
                     Contact
                   </Link>
                 </li>
-                
               </ul>
             </div>
 
@@ -725,7 +815,7 @@ export default function AfyaPrimeSupplies() {
                 </li>
                 <li>
                   <Link href="/products/maternal-neonatal-healthcare" className="text-slate-400 hover:text-green-400">
-                   Maternal & Neonatal Healthcare
+                    Maternal & Neonatal Healthcare
                   </Link>
                 </li>
                 <li>
