@@ -1,7 +1,7 @@
 
 "use client"
 
-import { useState } from "react"
+import { useState ,useEffect} from "react"
 import Image from "next/image"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
@@ -32,7 +32,8 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import { categoriesData } from "@/lib/product-data" // Import categoriesData
+import { categoriesData } from "@/lib/product-data" 
+import { useMemo } from "react"
 
 export default function AfyaPrimeSupplies() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -41,57 +42,47 @@ export default function AfyaPrimeSupplies() {
   const [isSearching, setIsSearching] = useState(false)
   const router = useRouter()
 
-  // Debug: Log categoriesData to see if it's loaded
-  console.log("categoriesData:", categoriesData)
+  
 
-  // Flatten all products for easier searching
-  const allProducts = categoriesData.flatMap((category) =>
+ const allProducts = useMemo(() => {
+  return categoriesData.flatMap((category) =>
     category.subcategories.flatMap((sub) =>
       sub.products.map((product) => ({
         ...product,
         subcategoryName: sub.name,
         subcategorySlug: sub.slug,
         categoryName: category.name,
-      })),
-    ),
+      }))
+    )
+  )
+}, [categoriesData])
+
+
+  
+   const performSearch = (query) => {
+  if (!query.trim()) {
+    setSearchResults([])
+    return
+  }
+
+  const lower = query.toLowerCase()
+  const filtered = allProducts.filter(
+    (product) =>
+      product.name.toLowerCase().includes(lower) ||
+      product.subcategoryName.toLowerCase().includes(lower) ||
+      product.categoryName.toLowerCase().includes(lower)
   )
 
-  // Debug: Log allProducts to see if flattening works
-  console.log("allProducts:", allProducts)
+  setSearchResults(filtered)
+}
 
-  // Handle search button click
-  const handleSearch = () => {
-    console.log("Search button clicked with query:", searchQuery)
-    setIsSearching(true)
-
-    if (searchQuery.trim() === "") {
-      setSearchResults([])
-      setIsSearching(false)
-      return
-    }
-
-    const lowerCaseQuery = searchQuery.toLowerCase()
-    const filtered = allProducts.filter(
-      (product) =>
-        product.name.toLowerCase().includes(lowerCaseQuery) ||
-        product.subcategoryName.toLowerCase().includes(lowerCaseQuery) ||
-        product.categoryName.toLowerCase().includes(lowerCaseQuery),
-    )
-
-    console.log("Filtered results:", filtered)
-    setSearchResults(filtered)
-    setIsSearching(false)
+useEffect(() => {
+  if (categoriesData.length > 0) {
+    performSearch(searchQuery)
   }
+}, [searchQuery, allProducts, categoriesData])
 
-  // Handle Enter key press in search input
-  const handleKeyPress = (e) => {
-    if (e.key === "Enter") {
-      e.preventDefault()
-      handleSearch()
-    }
-  }
-
-  // Clear search
+  
   const clearSearch = () => {
     setSearchQuery("")
     setSearchResults([])
@@ -199,16 +190,14 @@ export default function AfyaPrimeSupplies() {
                 <span>info@afyaprimesupplies.co.ke</span>
               </div>
             </div>
-            <div className="hidden md:flex items-center space-x-4">
-              <span>Free delivery on orders over KSh 10,000</span>
-            </div>
+           
           </div>
         </div>
 
-        {/* Main Header */}
+        
         <div className="container mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
-            {/* Logo */}
+            
             <Link href="/" className="flex items-center space-x-2">
               <div className="bg-green-600 p-2 rounded-lg">
                 <Stethoscope className="h-8 w-8 text-white" />
@@ -228,11 +217,11 @@ export default function AfyaPrimeSupplies() {
                   className="pl-10 pr-20 bg-slate-700 border-slate-600 text-white placeholder-slate-400 rounded-r-none"
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  onKeyPress={handleKeyPress}
+                  
                 />
                 <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-slate-400" />
                 <Button
-                  onClick={handleSearch}
+                 onClick={() => performSearch(searchQuery)}
                   disabled={isSearching}
                   className="bg-green-600 hover:bg-green-700 text-white px-4 rounded-l-none border-l-0"
                 >
@@ -271,7 +260,6 @@ export default function AfyaPrimeSupplies() {
             </div>
           </div>
 
-          {/* Navigation */}
           <nav className={`mt-4 ${isMenuOpen ? "block" : "hidden"} md:block`}>
             <ul className="flex flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-8">
               <li>
@@ -298,7 +286,7 @@ export default function AfyaPrimeSupplies() {
           </nav>
         </div>
 
-        {/* Mobile Search */}
+     
         <div className={`mt-4 ${isMenuOpen ? "block" : "hidden"} md:hidden`}>
           <div className="relative w-full flex">
             <Input
@@ -307,11 +295,11 @@ export default function AfyaPrimeSupplies() {
               className="pl-10 pr-20 bg-slate-700 border-slate-600 text-white placeholder-slate-400 rounded-r-none"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              onKeyPress={handleKeyPress}
+             
             />
             <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-slate-400" />
             <Button
-              onClick={handleSearch}
+              
               disabled={isSearching}
               className="bg-green-600 hover:bg-green-700 text-white px-4 rounded-l-none border-l-0"
             >
@@ -331,7 +319,7 @@ export default function AfyaPrimeSupplies() {
         </div>
       </header>
 
-      {/* Hero Section */}
+    
       <section className="relative bg-gradient-to-r from-green-600 to-green-700 text-white py-20">
         <div className="container mx-auto px-4">
           <div className="grid md:grid-cols-2 gap-12 items-center">
@@ -425,7 +413,6 @@ export default function AfyaPrimeSupplies() {
         </section>
       )}
 
-      {/* Show message when search has no results */}
       {searchQuery && searchResults.length === 0 && searchQuery.trim() !== "" && (
         <section className="py-16 bg-white">
           <div className="container mx-auto px-4 text-center">
@@ -440,7 +427,7 @@ export default function AfyaPrimeSupplies() {
         </section>
       )}
 
-      {/* Services Section */}
+      
       <section className="py-16 bg-gray-50">
         <div className="container mx-auto px-4">
           <div className="grid md:grid-cols-4 gap-8">
@@ -462,7 +449,7 @@ export default function AfyaPrimeSupplies() {
         </div>
       </section>
 
-      {/* Categories Section (only show if no search results) */}
+     
       {searchResults.length === 0 && (
         <section className="py-16 bg-white">
           <div className="container mx-auto px-4">
@@ -575,7 +562,6 @@ export default function AfyaPrimeSupplies() {
         </section>
       )}
 
-      {/* About Section */}
       <section className="py-16 bg-white scroll-mt-24" id="about">
         <div className="container mx-auto px-4">
           <div className="grid md:grid-cols-2 gap-12 items-center">
@@ -614,7 +600,7 @@ export default function AfyaPrimeSupplies() {
             </div>
             <div className="relative">
               <Image
-                src="/assets/images/medical-equipment.png"
+                src="/assets/images/diathermy/Diathermy Machine.png"
                 alt="Medical Professionals"
                 width={600}
                 height={500}
@@ -625,7 +611,7 @@ export default function AfyaPrimeSupplies() {
         </div>
       </section>
 
-      {/*contact section */}
+     
       <section id="contact" className="py-16 bg-gray-50 scroll-mt-24">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
@@ -716,7 +702,7 @@ export default function AfyaPrimeSupplies() {
         </div>
       </section>
 
-      {/* CTA Section */}
+      
       <section className="py-16 bg-slate-800 text-white">
         <div className="container mx-auto px-4 text-center">
           <h2 className="text-4xl font-bold mb-4 text-green-400">Ready to Upgrade Your Medical Supplies?</h2>
